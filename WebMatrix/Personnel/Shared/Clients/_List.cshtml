@@ -1,0 +1,36 @@
+﻿@using ProSoft.Personnel.Data;
+@{
+    var clients = DataContext.Current.Clients;
+    var count = 0;
+    
+    Page.Title = "Customers";
+}
+
+<h1>Customers</h1>
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Contact</th>
+            <th>Country</th>
+            <th>Rate</th>
+            <th>Projects</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var client in clients){
+            <tr class="@((++count % 2 == 0) ? "even" : "odd")">
+                <td>@client.Company</td>
+                <td>@client.Mailing.FirstName  @client.Mailing.Lastname</td>
+                <td>@client.Mailing.Address.Country</td>
+                <td>$@client.Rate.ToString("0.00")</td>
+                <td><a href="/clients/@client.Id/projects">@client.Projects.Count</a></td>
+                <td>
+                    <a href="/clients/@client.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

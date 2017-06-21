@@ -1,0 +1,33 @@
+﻿@{
+    //code here gets executed on every request
+    
+    // set the layout for all pages
+    Layout = "~/Layouts/_Themed.cshtml";
+    
+    // store a reference to "DummyTexts" in the page object
+    Page.Items = AppState["DummyTexts"];
+    
+    // Retrieve the theme names stored in application state
+    var themes = AppState["Themes"] as string[];
+    
+    // retrieve the theme index stored in session state
+    var index = Session["ThemeIndex"];
+    
+    // calculate the next index
+    if (index == null){
+        index = 0;
+    }
+    else {
+        var i = ((int) index) + 1;
+        if (i < 0 || i >= themes.Length) {
+            i = 0;
+        }
+        index = i;    
+    }
+    
+    // store the new index in session state
+    Session["ThemeIndex"] = index;
+    
+    // store the current theme in the page
+    Page.Theme = themes[(int)index];
+}

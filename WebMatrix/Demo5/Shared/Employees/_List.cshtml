@@ -1,0 +1,40 @@
+﻿@{
+    var db = Database.Open("Northwind");
+    var employees = db.Query("SELECT * FROM Employees");
+    var count = 0;
+    var managerQuery = "Select [First Name] + ' ' + [Last Name] AS Name FROM Employees WHERE [Employee ID] = @0";
+    
+    Page.Title = "Employees";
+}
+
+<h1>@Page.Title</h1>
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Title</th>
+            <th>Reports To</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var employee in employees){
+            var manager = "";
+            
+            if (employee["Reports To"] != null) {
+                manager = db.QueryValue(managerQuery, employee["Reports To"]);                
+            } 
+            <tr class="@((++count % 2 == 0) ? "even" : "odd")">
+                <td>@employee["Last Name"]</td>
+                <td>@employee["First Name"]</td>
+                <td>@employee.Title</td>
+                <td>@manager</td>
+                <td>
+                    <a href="/employees/@employee["employee ID"]">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

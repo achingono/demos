@@ -1,0 +1,93 @@
+body {
+    background: #FFFFFF url(images/main-bg.gif) repeat-x scroll 0 0;
+    border: 0 none;
+    font-family: Sans-Serif;
+    font-size: 100%;
+}
+a img{
+    border: 0px none transparent;
+}
+#control,
+#head,
+#menu a {
+    color: #fff;
+    text-decoration: none;
+}
+#control {
+    text-align: right;
+}
+#menu a:hover {
+    color: #00AEEF;
+}
+div.mask {
+    color: #555;
+}
+div.mask a {
+    color: #00AEEF;
+    text-decoration: none;
+}
+div.mask a:hover {
+    color: #555;
+    text-decoration: underline;
+}
+div.cols {
+    background-image: url(images/vertical-line.png);
+    background-position: top right;
+    background-repeat: repeat-y;
+}
+h1 {
+    color: #000;
+}
+.grid {
+    border: 1px solid #D6D6D6;
+    border-collapse: collapse;
+}
+.grid thead {
+    background-color: #e6e6e6;
+    font-size: 0.9em;
+}
+.grid .even {
+    background-color: #eee;
+}
+.grid tr {
+    border: 1px solid #D6D6D6;
+}
+.grid th {
+    padding: 3px;
+    text-align: left;
+    border: 1px solid #D6D6D6;
+}
+.grid th.ui-icon {
+    width: auto;
+    height: auto;
+    padding: 0 0 0 16px;
+    overflow: visible;
+    text-indent: 0;
+    border: 0px solid #e6e6e6;
+}
+.grid th.ui-icon a {
+    display: block;
+    background-color: #e6e6e6;
+    padding: 3px 3px 3px 0;
+}
+.grid th a span.ui-icon {
+    float: left;
+}
+.grid td {
+    text-align: left;
+    padding: 3px;
+    font-size: 0.9em;
+    border: 1px solid #D6D6D6;
+}
+.details label {
+    font-weight: bold;
+}
+.matrix .block {
+    border: 1px solid #D6D6D6;
+}
+#foot {
+    color: #888;
+    background-image: url(images/horizontal-line.png);
+    background-position: top left;
+    background-repeat: repeat-x;
+}

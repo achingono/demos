@@ -1,0 +1,13 @@
+@import "../Default/Layout.css";
+body {
+}
+div#wrap {
+    padding-top: 2em;
+}
+div#head,
+div#menu {
+    padding-top: 0;
+}
+div.mask {
+    padding-top: 4em;
+}

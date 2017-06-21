@@ -1,0 +1,44 @@
+﻿@using System.ServiceModel.Syndication;
+@using System.Xml;
+
+@{
+    var items = new List<SyndicationItem>();
+
+    foreach (var person in DataContext.Current.People) {
+        
+        var itemUri = string.Format("{0}://{1}{2}/People/{3}",
+            Request.Url.Scheme, 
+            Request.Url.Host,
+            Request.Url.IsDefaultPort ? string.Empty: string.Format(":{0}", Request.Url.Port),
+            person.Id);
+        
+        var item = new SyndicationItem(
+            title: string.Format("{0} {1}", person.FirstName ,person.LastName),
+            content: string.Format("{0}, {1}", person.LastName, person.LastName),
+            itemAlternateLink: new Uri(itemUri),
+            id: itemUri,
+            lastUpdatedTime: DateTime.Now
+        );
+        
+        item.PublishDate = DateTime.Now;
+        item.Summary = new TextSyndicationContent(string.Format("Person details for {0} {1}", 
+            person.FirstName , person.LastName));
+        
+        items.Add(item);
+    }
+    
+    var feed = new SyndicationFeed(
+        "People Listing",
+        "The list of all people on this site",
+        Request.Url,
+        items);
+        
+    var formatter = new Rss20FeedFormatter(feed);
+
+    Layout = "";
+    Response.ContentType = "text/xml";
+    
+    using(var writer = XmlWriter.Create(Response.Output)){
+        formatter.WriteTo(writer);
+    }
+}

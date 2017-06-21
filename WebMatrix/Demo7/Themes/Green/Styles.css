@@ -1,0 +1,62 @@
+body {
+    background-image: url(images/untitled.bmp);
+    background-repeat: repeat-x;
+    border: 0 none;
+    font-family: Sans-Serif;
+    font-size: 100%;
+}
+#menu ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+#menu ul li a.active {
+    color: #ACFC5D;
+}
+a img {
+    border: none;
+}
+.grid {
+    border: 1px solid #D6D6D6;
+    border-collapse: collapse;
+    width: 99%;
+}
+.grid thead {
+    background-color: #e6e6e6;
+    font-size: 0.9em;
+}
+.grid .even {
+    background-color: #eee;
+}
+.grid tr {
+    border: 1px solid #D6D6D6;
+}
+.grid th {
+    padding: 3px;
+    text-align: left;
+    border: 1px solid #D6D6D6;
+}
+.grid th.ui-icon {
+    width: auto;
+    height: auto;
+    padding: 0 0 0 16px;
+    overflow: visible;
+    text-indent: 0;
+    border: 0px solid #e6e6e6;
+}
+.grid th.ui-icon a {
+    display: block;
+    background-color: #e6e6e6;
+    padding: 3px 3px 3px 0;
+}
+.grid th a span.ui-icon {
+    float: left;
+}
+.grid td {
+    text-align: left;
+    padding: 3px;
+    font-size: 0.9em;
+    border: 1px solid #D6D6D6;
+}
+.details label {
+    font-weight: bold;
+}

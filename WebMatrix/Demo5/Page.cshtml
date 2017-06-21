@@ -1,0 +1,22 @@
+﻿@{   
+    // retrieve the matching item from the list of tuples
+    var name = UrlData[0];
+    var item = (Page.Items as IEnumerable<Tuple<string, string>>)
+                .Single(i => i.Item1
+                              .Replace(" ", "-")
+                              .Equals(name, StringComparison.OrdinalIgnoreCase)
+                        );
+    
+    // set the title of the page
+    Page.Title = item.Item1;
+}
+
+@section menu{
+   @RenderPage("~/Shared/_Menu.cshtml") 
+}
+
+<h1>@Page.Title</h1>
+
+<p>@item.Item2</p>
+
+@RenderPage("~/Shared/_List.cshtml")

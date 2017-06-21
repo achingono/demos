@@ -1,0 +1,34 @@
+﻿@using ProSoft.Personnel.Data;
+@{
+    var teams = DataContext.Current.Teams;
+    var count = 0;
+    
+    Page.Title = "Teams";
+}
+
+<h1>@Page.Title</h1>
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th>Team Name</th>
+            <th>Description</th>
+            <th>Members</th>
+            <th>Projects</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var team in teams){
+            <tr class="@((++count % 2 == 0) ? "even" : "odd")">
+                <td>@team.Name</td>
+                <td>@team.Description</td>
+                <td><a href="/teams/@team.Id/members">@team.Members.Count()</a></td>
+                <td><a href="/teams/@team.Id/projects">@team.Projects.Count()</a></td>
+                <td>
+                    <a href="/teams/@team.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

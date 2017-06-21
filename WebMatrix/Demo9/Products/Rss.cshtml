@@ -1,0 +1,46 @@
+﻿@using System.ServiceModel.Syndication;
+@using System.Xml;
+
+@{
+    var db = Database.Open("Northwind");
+    var products = db.Query("SELECT * FROM products");
+
+    var items = new List<SyndicationItem>();
+
+    foreach (var product in products) {
+        
+        var itemUri = string.Format("{0}://{1}{2}/products/{3}",
+            Request.Url.Scheme, 
+            Request.Url.Host,
+            Request.Url.IsDefaultPort ? string.Empty: string.Format(":{0}", Request.Url.Port),
+            product["Product ID"]);
+        
+        var item = new SyndicationItem(
+            title: product["Product Name"],
+            content: product["Product Name"],
+            itemAlternateLink: new Uri(itemUri),
+            id: itemUri,
+            lastUpdatedTime: DateTime.Now
+        );
+        
+        item.PublishDate = DateTime.Now;
+        item.Summary = new TextSyndicationContent(string.Format("${0:N}",product["Unit Price"]));
+        
+        items.Add(item);
+    }
+    
+    var feed = new SyndicationFeed(
+        "product Listing",
+        "The list of all products on this site",
+        Request.Url,
+        items);
+        
+    var formatter = new Rss20FeedFormatter(feed);
+
+    Layout = "";
+    Response.ContentType = "text/xml";
+    
+    using(var writer = XmlWriter.Create(Response.Output)){
+        formatter.WriteTo(writer);
+    }
+}

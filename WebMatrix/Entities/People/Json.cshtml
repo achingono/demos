@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "";
+    Response.ContentType = "text/json";
+
+    var groups = new List<dynamic>();
+
+    foreach (var group in DataContext.Current.Groups) {
+        groups.Add(new
+        {
+            id = group.Id,
+            name = group.Name,
+            people = group.People.Select(person => new { 
+                id = person.Id,
+                firstName = person.FirstName,
+                lastName = person.LastName,
+            }),
+        });
+    }
+    
+    Json.Write(groups, Response.Output);
+}

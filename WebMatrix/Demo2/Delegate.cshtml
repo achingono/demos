@@ -1,0 +1,22 @@
+﻿@{
+    Page.Title = "Razor Delegates";
+    Func<dynamic, object> bi = @<strong><em>@item</em></strong>;
+}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@Page.Title</title>
+    </head>
+    <body>
+        <h1>@Page.Title</h1>
+        <p>The following paragraph is in <strong>bold</strong> and <em>italics</em></p>
+        
+        @* bi is the delegate we declared in the code block *@
+            
+        <p>
+            @bi("Maximas vero virtutes iacere omnis necesse est voluptate dominante. Graece donan, Latine voluptatem vocant.")
+        </p>
+    </body>
+</html>

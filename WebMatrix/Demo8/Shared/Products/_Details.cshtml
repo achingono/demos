@@ -1,0 +1,42 @@
+﻿@{
+    var productId = UrlData[0];
+    
+    if (productId.IsEmpty()) {
+        Response.Redirect("~/products");
+    }
+    
+    var db = Database.Open("Northwind"); 
+    
+    var product = db.QuerySingle("SELECT * FROM products WHERE [product ID] = @0", productId);
+    
+    Page.Title = product["Product Name"];
+}
+
+<h1>Product Details</h1>
+
+<div class="product details">
+    <a class="image" href="/products/@product["product ID"]">
+        <img alt="@product["Product Name"]" src="/Themes/Default/Images/Untitled.jpg"/>
+    </a>
+    <div class="title">
+        <label>Name :</label>
+        <span class="data">@product["Product Name"]</span>
+    </div>
+    <div class="name">
+        <label>Supplier:</label>
+        <span class="data">@db.QueryValue("SELECT [Company Name] FROM Suppliers WHERE [Supplier ID] = @0", product["Supplier ID"])</span>
+    </div>
+    <div class="contact">
+        <label>Category :</label>
+        <span class="data">@db.QueryValue("SELECT [Category Name] FROM Categories WHERE [Category ID] = @0", product["Category ID"])</span>
+    </div>
+    <div class="price">
+        <label>Price :</label>
+        <span class="data">@product["Unit Price"]</span>
+    </div>
+    <div class="buttons">
+        <a href="./">Back to List</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="./@productId/edit">Edit</a>
+    </div>
+</div>

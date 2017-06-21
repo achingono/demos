@@ -1,0 +1,89 @@
+﻿@using ProSoft.Personnel.Data;
+
+@helper Employee(Employee employee)
+{
+    <div class="name">
+        <label>Last Name :</label>
+        <span class="data">@employee.LastName</span>
+    </div>
+    <div class="contact">
+        <label>First Name :</label>
+        <span class="data">@employee.FirstName</span>
+    </div>
+    <div class="title">
+        <label>Title :</label>
+        <span class="data">@employee.Position</span>
+    </div>
+    @*<div class="address">
+        <label>Address :</label>
+        <span class="data">@employee.Address.Street</span>
+    </div>
+    <div class="city">
+        <label>City :</label>
+        <span class="data">@employee.Address.City</span>
+    </div>
+    <div class="region">
+        <label>Region :</label>
+        <span class="data">@employee.Address.State</span>
+    </div>
+    <div class="code">
+        <label>Postal Code:</label>
+        <span class="data">@employee.Adress.PostalCode</span>
+    </div>
+    <div class="country">
+        <label>Country :</label>
+        <span class="data">@employee.Adress.Country</span>
+    </div>
+    <div class="phone">
+        <label>Phone :</label>
+        <span class="data">@employee.Phone</span>
+    </div>*@
+    <div class="email">
+        <label>Email :</label>
+        <span class="data">@employee.Email</span>
+    </div>
+    <div class="date">
+        <label>Hired On :</label>
+        <span class="data">@employee.HiredOn</span>
+    </div>
+    <div class="date">
+        <label>Terminated On :</label>
+        <span class="data">@employee.TerminatedOn</span>
+    </div>    
+}
+
+@helper Contact(Contact contact)
+    {
+    <div class="name">
+        <label>Name :</label>
+        <span class="data">@contact.FirstName @contact.Lastname</span>
+    </div>
+    <div class="address">
+        <label>Address :</label>
+        <span class="data">@contact.Address.Street</span>
+    </div>
+    <div class="city">
+        <label>City :</label>
+        <span class="data">@contact.Address.City</span>
+    </div>
+    <div class="region">
+        <label>State :</label>
+        <span class="data">@contact.Address.State</span>
+    </div>
+    <div class="code">
+        <label>Postal Code:</label>
+        <span class="data">@contact.Address.PostalCode</span>
+    </div>
+    <div class="country">
+        <label>Country :</label>
+        <span class="data">@contact.Address.Country</span>
+    </div>
+    <div class="phone">
+        <label>Phone :</label>
+        <span class="data">@contact.Phone</span>
+    </div>
+    <div class="fax">
+        <label>Fax :</label>
+        <span class="data">@contact.Fax</span>
+    </div>
+}

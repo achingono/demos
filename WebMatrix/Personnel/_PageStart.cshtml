@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Layouts/_Default.cshtml";
+    Page.Theme = "clean";
+    Page.Share = "Shared";
+    Page.Name = "_List";
+    
+    var count = UrlData.Count();
+
+    if (count >= 2)
+    {
+        Page.Name = string.Format("_{0}", UrlData[1]);
+    }
+    else if (count >= 1)
+    {
+        Page.Name = "_Details";
+    }
+}

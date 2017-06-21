@@ -1,0 +1,25 @@
+﻿@using ef = System.Data.Entity;
+@using System.Web.Routing;
+@using Microsoft.ApplicationServer.Http.Activation;
+@using Microsoft.ApplicationServer.Http;
+@using Microsoft.ApplicationServer.Http.Description;
+@using Microsoft.ApplicationServer;
+@using ProSoft.Personnel.Services;
+@using ProSoft.Personnel.Data;
+@using System.Data.Entity.Infrastructure;
+@using System.ServiceModel.Activation;
+
+@{    
+    ef.Database.DefaultConnectionFactory = new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0");
+    ef.Database.SetInitializer<Entities>(new DatabaseInitializer());
+
+    var routes = RouteTable.Routes;
+    var factory = new HttpServiceHostFactory();
+    
+    routes.Add(new ServiceRoute("api/clients", factory, typeof(ProSoft.Personnel.Services.Clients)));
+    routes.Add(new ServiceRoute("api/employees", factory, typeof(ProSoft.Personnel.Services.Employees)));
+    routes.Add(new ServiceRoute("api/teams", factory, typeof(ProSoft.Personnel.Services.Teams)));
+    routes.Add(new ServiceRoute("api/projects", factory, typeof(ProSoft.Personnel.Services.Projects)));
+    
+    DataContext.Current.Database.Initialize(false);
+}

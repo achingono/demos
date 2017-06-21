@@ -1,0 +1,35 @@
+﻿@{
+    var random = new Random();
+    var flag = ((random.Next(20) % 2) == 0);
+    Page.Title = "Mixing text and code";
+}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@Page.Title</title>
+    </head>
+    <body>
+        <h1>@Page.Title</h1>
+        <p>Maximas vero virtutes iacere omnis necesse est voluptate dominante. Graece donan, Latine voluptatem vocant. Portenta haec esse dicit, neque ea ratione ullo modo posse vivi; Ad eas enim res ab Epicuro praecepta dantur. </p>
+        
+        <strong>
+        @if(flag) {
+            <text>The random flag is true</text>
+        }
+        else {
+            @:The random flag is false
+        }
+        </strong>
+        
+        
+        <% if (flag) %>
+        The random flag is true
+        <% } else { %>
+        The random flag is flase
+        <% } %>
+        
+        <p>Illum mallem levares, quo optimum atque humanissimum virum, Cn. Pisone in eo gymnasio, quod Ptolomaeum vocatur, unaque nobiscum Q. Omnes enim iucundum motum, quo sensus hilaretur. <i>Traditur, inquit, ab Epicuro ratio neglegendi doloris.</i> Non potes, nisi retexueris illa. Quae duo sunt, unum facit. </p>
+    </body>
+</html>

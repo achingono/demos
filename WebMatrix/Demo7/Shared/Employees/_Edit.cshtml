@@ -1,0 +1,89 @@
+﻿@{
+    var employeeId = UrlData[0];
+    
+    if (employeeId.IsEmpty()) {
+        Response.Redirect("~/employees");
+    }
+    
+    var db = Database.Open("Northwind"); 
+    var employee = db.QuerySingle("SELECT * FROM Employees WHERE [Employee ID] = @0", employeeId);
+   
+    if (IsPost) {
+        // ensure last name was entered.
+        var lastName = Request["lastname"];
+        if (lastName.IsEmpty()) {
+           ModelState.AddError("lastname", "Last name is required.");
+        }
+        
+        // ensure first name was entered.
+        var firstName = Request["firstname"];
+        if (firstName.IsEmpty()) {
+           ModelState.AddError("firstname", "First name is required.");
+        }
+        
+        if(ModelState.IsValid) {
+            // Define the insert query. The values to assign to the
+            // columns in the Product table are defined as parameters
+            // with the VALUES keyword.
+            var updateQuery = @"UPDATE Employees SET [Last Name] = @0, [First Name] = @1
+                                WHERE [Employee ID] = @2";
+            
+            // Execute query
+            db.Execute(updateQuery, lastName, firstName, employeeId);
+            
+            // Display the page that lists products.
+            Response.Redirect(@Href("~/employees/" + employeeId));
+        }
+        
+    }
+    
+    Page.Title = string.Format("{0} {1}", employee["First Name"], employee["Last Name"]) ;
+}
+
+<h1>Employee Details</h1>
+
+<form method="post" action="">
+<div class="employee details">
+    <div class="name">
+        <label for="lastname">Last Name :</label>
+        <input name="lastname" type="text" value="@employee["Last Name"]" />
+    </div>
+    <div class="contact">
+        <label for="firstname">First Name :</label>
+        <input name="firstname" type="text" value="@employee["First Name"]" />
+    </div>
+    <div class="title">
+        <label for="title">Title :</label>
+        <input name="title" type="text" value="@employee.Title" />
+    </div>
+    <div class="address">
+        <label for="address">Address :</label>
+        <input name="address" type="text" value="@employee.Address" />
+    </div>
+    <div class="city">
+        <label for="city">City :</label>
+        <input name="city" type="text" value="@employee.City" />
+    </div>
+    <div class="region">
+        <label for="region">Region :</label>
+        <input name="region" type="text" value="@employee.Region" />
+    </div>
+    <div class="code">
+        <label for="code">Postal Code:</label>
+        <input name="code" type="text" value="@employee["Postal Code"]" />
+    </div>
+    <div class="country">
+        <label for="country">Country :</label>
+        <input name="country" type="text" value="@employee.Country" />
+    </div>
+    <div class="phone">
+        <label for="phone">Phone :</label>
+        <input name="phone" type="text" value="@employee["Home Phone"]" />
+    </div>
+    <div class="buttons">
+        <a href="./">Back to List</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" value="Submit"/>
+    </div>
+</div>
+</form>

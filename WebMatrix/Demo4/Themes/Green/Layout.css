@@ -1,0 +1,10 @@
+@import "../Default/Layout.css";
+body {
+}
+#head {
+	float: none;
+}
+#menu {
+    float: none;
+    padding-top: 1.2em;
+}

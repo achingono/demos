@@ -1,0 +1,23 @@
+﻿@{
+    var items = new[] {
+        new { Title = "Ex quo", Description = "Ex quo, id quod omnes expetunt, beate vivendi ratio inveniri et comparari potest." },
+        new { Title = "Diligentissime", Description = "Quae diligentissime contra Aristonem dicuntur a Chryippo." },
+        new { Title = "Eorum enim", Description = "Eorum enim est haec querela, qui sibi cari sunt seseque diligunt." },
+        new { Title = "Neque enim", Description = "Neque enim civitas in seditione beata esse potest nec in discordia dominorum domus;" },
+        new { Title = "Istam voluptatem", Description = "Istam voluptatem perpetuam quis potest praestare sapienti?" },
+        new { Title = "Expectoque", Description = "Expectoque quid ad id, quod quaerebam, respondeas." },
+        new { Title = "Avaritiamne", Description = "Avaritiamne minuis?" },
+    };
+    
+    var name = UrlData[0];
+    var item = items.Single(i => i.Title.Replace(" ", "-").Equals(name, StringComparison.OrdinalIgnoreCase));
+}
+
+@section menu{
+   @RenderPage("~/Shared/_Menu.cshtml") 
+}
+
+<h1>@item.Title</h1>
+
+<p>@item.Description</p>
+

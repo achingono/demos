@@ -1,0 +1,63 @@
+﻿@{
+    var customerId = UrlData[0];
+    
+    if (customerId.IsEmpty()) {
+        Response.Redirect("~/customers");
+    }
+    
+    var db = Database.Open("Northwind"); 
+    
+    var customer = db.QuerySingle("SELECT * FROM Customers WHERE [Customer ID] = @0", customerId);
+    
+    Page.Title = customer["Company Name"];
+}
+
+<h1>Customer Details</h1>
+
+<div class="customer details">
+    <div class="name">
+        <label>Company :</label>
+        <span class="data">@customer["Company Name"]</span>
+    </div>
+    <div class="contact">
+        <label>Contact :</label>
+        <span class="data">@customer["Contact Name"]</span>
+    </div>
+    <div class="title">
+        <label>Title :</label>
+        <span class="data">@customer["Contact Title"]</span>
+    </div>
+    <div class="address">
+        <label>Address :</label>
+        <span class="data">@customer.Address</span>
+    </div>
+    <div class="city">
+        <label>City :</label>
+        <span class="data">@customer.City</span>
+    </div>
+    <div class="region">
+        <label>Region :</label>
+        <span class="data">@customer.Region</span>
+    </div>
+    <div class="code">
+        <label>Postal Code:</label>
+        <span class="data">@customer["Postal Code"]</span>
+    </div>
+    <div class="country">
+        <label>Country :</label>
+        <span class="data">@customer.Country</span>
+    </div>
+    <div class="phone">
+        <label>Phone :</label>
+        <span class="data">@customer.Phone</span>
+    </div>
+    <div class="fax">
+        <label>Fax :</label>
+        <span class="data">@customer.Fax</span>
+    </div>
+    <div class="buttons">
+        <a href="./">Back to List</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="./@customerId/edit">Edit</a>
+    </div>
+</div>

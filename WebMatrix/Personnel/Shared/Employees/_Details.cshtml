@@ -1,0 +1,24 @@
+﻿@{
+    var employeeId = UrlData[0];
+    
+    if (employeeId.IsEmpty()) {
+        Response.Redirect("~/employees");
+    }
+
+    var context = DataContext.Current;
+
+    var employee = context.Employees.Find(int.Parse(employeeId));
+    
+    Page.Title = string.Format("{0} {1}", employee.FirstName, employee.LastName) ;
+}
+
+<h1>Employee Details</h1>
+
+<div class="employee details">
+    @Helpers.Details.Employee(employee)
+    <div class="buttons">
+        <a href="./">Back to List</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="./@employeeId/edit">Edit</a>
+    </div>
+</div>

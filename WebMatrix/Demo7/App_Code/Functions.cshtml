@@ -1,0 +1,11 @@
+﻿@using System.Text;
+@functions {
+    
+    public static string RandomDummy(IEnumerable<Tuple<string, string>> items)
+    {
+        var random = new Random();
+        var index = random.Next(items.Count());
+        
+        return items.ElementAt(index).Item2;
+    }
+}

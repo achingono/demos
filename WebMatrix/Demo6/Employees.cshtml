@@ -1,0 +1,17 @@
+﻿@{
+    var pageLocation = "~/Shared/Employees/";
+    var pageName = "_List";
+    var count = UrlData.Count();
+    
+    if (count >= 1){
+        pageName = "_Details";
+    }
+    
+    Page.Theme = "Green";
+}
+
+@section menu{
+   @RenderPage("~/Shared/_Menu.cshtml") 
+}
+
+@RenderPage(string.Format("{0}{1}.cshtml", pageLocation, pageName))

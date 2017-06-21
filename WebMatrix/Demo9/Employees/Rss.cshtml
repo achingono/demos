@@ -1,0 +1,46 @@
+﻿@using System.ServiceModel.Syndication;
+@using System.Xml;
+
+@{
+    var db = Database.Open("Northwind");
+    var employees = db.Query("SELECT * FROM Employees");
+
+    var items = new List<SyndicationItem>();
+
+    foreach (var employee in employees) {
+        
+        var itemUri = string.Format("{0}://{1}{2}/employees/{3}",
+            Request.Url.Scheme, 
+            Request.Url.Host,
+            Request.Url.IsDefaultPort ? string.Empty: string.Format(":{0}", Request.Url.Port),
+            employee["Employee ID"]);
+        
+        var item = new SyndicationItem(
+            title: string.Format("{0} {1}", employee["First Name"] ,employee["Last Name"]),
+            content: string.Format("{0}, {1}", employee["Last Name"], employee["Last Name"]),
+            itemAlternateLink: new Uri(itemUri),
+            id: itemUri,
+            lastUpdatedTime: employee["Hire Date"]
+        );
+        
+        item.PublishDate = DateTime.Now;
+        item.Summary = new TextSyndicationContent(employee.Notes);
+        
+        items.Add(item);
+    }
+    
+    var feed = new SyndicationFeed(
+        "Employee Listing",
+        "The list of all employees on this site",
+        Request.Url,
+        items);
+        
+    var formatter = new Rss20FeedFormatter(feed);
+
+    Layout = "";
+    Response.ContentType = "text/xml";
+    
+    using(var writer = XmlWriter.Create(Response.Output)){
+        formatter.WriteTo(writer);
+    }
+}

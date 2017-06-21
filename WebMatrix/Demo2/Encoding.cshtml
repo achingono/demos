@@ -1,0 +1,28 @@
+﻿@{
+    var paragraph = @"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                <strong>Aufert enim sensus</strong> actionemque tollit omnem. 
+                Dempta enim aeternitate nihilo beatior Iuppiter quam Epicurus; 
+                Quid de Platone aut de <em>Democrito loquar</em>? Eam stabilem appellas. 
+                Primum in nostrane potestate est, quid meminerimus? Duo Reges: 
+                constructio interrete. <u>Res enim fortasse verae</u>, certe graves, 
+                non <a href='#'>ita tractantur, ut debent</a>, sed aliquanto minutius. 
+                Id enim volumus, id contendimus, ut officii fructus sit ipsum officium. </p>";
+    Page.Title = "HTML Encoding";
+}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@Page.Title</title>
+    </head>
+    <body>
+        <h1>@Page.Title</h1>
+        @* The following paragraph will be automatically encoded *@
+        @paragraph
+        
+        @* The following paragraph will not be encoded *@
+        @Html.Raw(paragraph)
+        
+    </body>
+</html>

@@ -1,0 +1,88 @@
+﻿@{
+    var context = DataContext.Current;
+    var people = context.People;
+    var groups = context.Groups;
+    
+    if (IsPost) {
+        var groupId = 0;
+        var groupKey = Request["groupId"];
+        var groupName = Request["groupName"];
+        Group group = null;
+        
+        int.TryParse(groupKey, out groupId);
+
+        if (groupId > 0){
+            group = groups.SingleOrDefault(g => g.Id == groupId);
+        }
+        else { 
+            group = new Group { Name = groupName, People = new List<Person>() };
+            context.Groups.Add(group);
+        }
+
+        group.People.Add(new Person
+        {
+            FirstName = Request["firstName"],
+            LastName = Request["lastName"]
+        });
+
+        context.SaveChanges();
+    }
+}
+
+<h1>Welcome to the Person database</h1>
+
+<fieldset>
+    <legend>Add Person</legend>
+    <form method="post" action="">
+        <label for="group">Group:</label>
+        <select name="groupId">
+            <option value="0">New Group</option>
+            @foreach (var group in groups){
+                <option value="@group.Id">@group.Name</option>
+            }
+        </select>
+        <input name="groupName" type="text"/>
+
+        <label for="firstName">First Name:</label>
+        <input name="firstName" type="text" />
+
+        <label for="lastName">Last Name:</label>
+        <input name="lastName" type="text" />
+
+        <input name="submit" type="submit" value="Submit" />
+    </form>
+</fieldset>
+<p>&nbsp;</p>
+<div id="people" class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons"></div>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            url: "people/json",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                $(response).each(function (i, group) {
+                    $("<h3></h3>")
+                        .append($("<a href='#'></a>")
+                            .append(group.name))
+                        .appendTo("#people");
+                    $("<div></div>")
+                        .append(function () {
+                            var ul = $("<ul></ul>");
+                            $(group.people).each(function (i, person) {
+                                $("<li></li>")
+                                    .append(person.lastName)
+                                    .append(", ")
+                                    .append(person.firstName)
+                                    .appendTo(ul);
+                            })
+                            return ul;
+                        })
+                        .appendTo("#people");
+                });
+                $("#people").accordion();
+            }
+        });
+        $("input[type='submit']").button();
+    });
+</script>

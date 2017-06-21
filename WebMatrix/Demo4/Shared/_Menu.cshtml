@@ -1,0 +1,8 @@
+﻿
+<ul class="menu horizontal">
+	@foreach( var item in Page.Items){
+        <li>
+            <a href="/page/@item.Item1.Replace(" ", "-").ToLower()" title="@item.Item2">@item.Item1</a>
+        </li>
+    }
+</ul>

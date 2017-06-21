@@ -1,0 +1,101 @@
+﻿@using ProSoft.Personnel.Data;
+@helper Employees(IEnumerable<Employee> employees)
+{
+    var count = 0;
+    <table class="grid">
+        <thead>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Title</th>
+                <th>Reports To</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in employees)
+            {
+                var managerFirstName = "";
+                var managerLastName = "";
+
+                if (employee.Manager != null)
+                {
+                    managerFirstName = employee.Manager.FirstName;
+                    managerLastName = employee.Manager.LastName;
+                } 
+                <tr class="@((++count % 2 == 0) ? "even" : "odd")">
+                    <td>@employee.LastName</td>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.Position</td>
+                    <td>@managerFirstName @managerLastName</td>
+                    <td>
+                        <a href="/employees/@employee.Id">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@helper Projects(IEnumerable<Project> projects)
+{
+    var count = 0;
+    <table class="grid">
+        <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Description</th>
+                <th>Client</th>
+                <th>Tasks</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in projects)
+            { 
+                <tr class="@((++count % 2 == 0) ? "even" : "odd")">
+                    <td>@project.Name</td>
+                    <td>@project.Description</td>
+                    <td><a href="/clients/@project.Client.Id">@project.Client.Company</a></td>
+                    <td><a href="/projects/@project.Id/tasks">@project.Tasks.Count</a></td>
+                    <td>
+                        <a href="/projects/@project.Id">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@helper Tasks(IEnumerable<Task> tasks)
+{
+    var count = 0;
+    <table class="grid">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Description</th>
+                <th>Estimated Start Date</th>
+                <th>Estimated Hours</th>
+                <th>Estimated Due Date</th>
+                <th>Activities</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in tasks)
+            { 
+                <tr class="@((++count % 2 == 0) ? "even" : "odd")">
+                    <td>@task.Title</td>
+                    <td>@task.Description</td>
+                    <td>@task.Estimated.StartDate</td>
+                    <td>@task.Estimated.Hours</td>
+                    <td>@task.Estimated.DueDate</td>
+                    <td><a href="#activities">@task.Activities.Count</a></td>
+                    <td>
+                        <a href="/tasks/@task.Id">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

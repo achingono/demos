@@ -1,0 +1,31 @@
+﻿@{
+    var projectId = UrlData[0];
+    
+    if (projectId.IsEmpty()) {
+        Response.Redirect("~/projects");
+    }
+
+    var context = DataContext.Current;
+    var project = context.Projects.Find(int.Parse(projectId));
+    
+    Page.Title = project.Name;
+}
+
+<h1>Project Details</h1>
+
+<div class="project details">
+    <div class="name">
+        <label>Name :</label>
+        <span class="data">@project.Name</span>
+    </div>
+    <div class="description">
+        <label>Description :</label>
+        <span class="data">@project.Description</span>
+    </div>
+    <div class="team">
+        <label>Team:</label>
+        <span class="data">@project.Team.Name</span>
+    </div>
+</div>
+<div>&nbsp;</div>
+@Helpers.Lists.Tasks(@project.Tasks)

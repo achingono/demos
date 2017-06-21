@@ -1,0 +1,59 @@
+﻿@{
+    var employeeId = UrlData[0];
+    
+    if (employeeId.IsEmpty()) {
+        Response.Redirect("~/employees");
+    }
+    
+    var db = Database.Open("Northwind"); 
+    
+    var employee = db.QuerySingle("SELECT * FROM Employees WHERE [Employee ID] = @0", employeeId);
+    
+    Page.Title = string.Format("{0} {1}", employee["First Name"], employee["Last Name"]) ;
+}
+
+<h1>Employee Details</h1>
+
+<div class="employee details">
+    <div class="name">
+        <label>Last Name :</label>
+        <span class="data">@employee["Last Name"]</span>
+    </div>
+    <div class="contact">
+        <label>First Name :</label>
+        <span class="data">@employee["First Name"]</span>
+    </div>
+    <div class="title">
+        <label>Title :</label>
+        <span class="data">@employee.Title</span>
+    </div>
+    <div class="address">
+        <label>Address :</label>
+        <span class="data">@employee.Address</span>
+    </div>
+    <div class="city">
+        <label>City :</label>
+        <span class="data">@employee.City</span>
+    </div>
+    <div class="region">
+        <label>Region :</label>
+        <span class="data">@employee.Region</span>
+    </div>
+    <div class="code">
+        <label>Postal Code:</label>
+        <span class="data">@employee["Postal Code"]</span>
+    </div>
+    <div class="country">
+        <label>Country :</label>
+        <span class="data">@employee.Country</span>
+    </div>
+    <div class="phone">
+        <label>Phone :</label>
+        <span class="data">@employee["Home Phone"]</span>
+    </div>
+    <div class="buttons">
+        <a href="./">Back to List</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="./@employeeId/edit">Edit</a>
+    </div>
+</div>

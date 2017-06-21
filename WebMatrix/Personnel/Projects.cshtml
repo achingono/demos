@@ -1,0 +1,34 @@
+﻿@{
+    IEnumerable<Project> projects = null;
+    if (IsPost) {      
+        var clientId = 0;
+        var teamId = 0;
+
+        int.TryParse(Request.Form["clientId"], out clientId);
+        int.TryParse(Request.Form["teamId"], out teamId);
+        
+        if(teamId > 0 && clientId > 0) {
+            projects = DataContext.Current.Projects.Where(p => p.Team.Id == teamId && p.Client.Id == clientId);
+        }
+        else if(teamId > 0) {
+            projects = DataContext.Current.Projects.Where(p => p.Team.Id == teamId);
+        }
+        else if (clientId > 0) {
+            projects = DataContext.Current.Projects.Where(p => p.Client.Id == clientId);
+        }
+    }
+}
+
+@section head{
+    <script type="text/javascript" src="Scripts/jquery-1.6.3.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-ui-1.8.16.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.tmpl.min.js"></script>
+    <link href="Content/themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+}
+
+@RenderPage(string.Format("~/{0}/{1}/{2}.cshtml", Page.Share, "Projects", Page.Name))
+
+@if (projects != null)
+{
+    @Helpers.Lists.Projects(projects)
+}

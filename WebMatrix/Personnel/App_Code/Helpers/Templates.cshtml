@@ -1,0 +1,50 @@
+﻿@using System.ComponentModel.DataAnnotations;
+
+@helper Render(Type type) {
+	if (type != null)
+	{
+		var typeName = type.Name.ToLowerInvariant();
+	<script id="@(typeName)Template" type="text/html">
+		<form id="@(typeName)Form" method="post" action="">
+			<div id="current-node-error" class="ui-widget" data-bind="visible: isError">
+				<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+					<p ><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span> 
+					<strong>Alert:</strong> <span data-bind="text: errorMessage"></span></p>
+				</div>
+			</div>        
+			@{
+			var properties = type.GetProperties();
+
+			foreach (var property in properties)
+			{
+				if (Attribute.IsDefined(property, typeof(EditableAttribute)))
+				{
+				<div class="row">
+					<label for="@property.Name">@property.Name :</label>
+					@{
+					var inputTypeName = "text";
+					var multiLine = false;
+					if (Attribute.IsDefined(property, typeof(DataTypeAttribute))) {
+						var attribute = Attribute.GetCustomAttribute(property, typeof(DataTypeAttribute)) as DataTypeAttribute;
+
+						if (attribute != null) { 
+							inputTypeName = attribute.DataType.ToString("F").ToLowerInvariant(); 
+							multiLine = (attribute.DataType == DataType.MultilineText || attribute.DataType == DataType.Html);
+						}
+					}
+					if (multiLine)
+					{ 
+						<textarea id="@typeName@property.Name" name="@property.Name" class="@inputTypeName.ToLower()" data-bind="text: @property.Name"></textarea>
+					}
+					else { 
+						<input id="@typeName@property.Name" type="@inputTypeName.ToLower()" name="@property.Name" data-bind="value: @property.Name" />
+					}                    
+					}
+				</div>
+				}
+			}
+		}
+		</form>    
+	</script>
+	}
+}

@@ -1,0 +1,40 @@
+﻿@{
+    var teamId = UrlData[0];
+    
+    if (teamId.IsEmpty()) {
+        Response.Redirect("~/teams");
+    }
+
+    var context = DataContext.Current;
+    var team = context.Teams.Find(int.Parse(teamId));
+    
+    Page.Title = team.Name;
+}
+
+<h1>Team Details</h1>
+
+<div class="team details">
+    <div class="name">
+        <label>Name :</label>
+        <span class="data">@team.Name</span>
+    </div>
+    <div class="description">
+        <label>Description :</label>
+        <span class="data">@team.Description</span>
+    </div>
+</div>
+<div>&nbsp;</div>
+<div class="matrix">
+    <div class="block odd">
+        <p>
+            <big>There are <strong>@team.Members.Count()</strong> members in this team</big>
+        </p>        
+        <a href="@(team.Id)/members">View All</a> | <a href="@(team.Id)/members/add">Add New</a> | <a href="#projects" class="edit">Edit</a>
+    </div>
+    <div class="block">
+        <p>
+            <big>This team has <strong>@team.Projects.Count()</strong> projects assigned</big>
+        </p>        
+        <a href="@(team.Id)/projects">View All</a> | <a href="@(team.Id)/projects/add">Add New</a> | <a href="#projects" class="edit">Edit</a>
+    </div>
+</div>

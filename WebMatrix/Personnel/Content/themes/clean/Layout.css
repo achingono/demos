@@ -1,0 +1,27 @@
+@import "../Default/Layout.css";
+body {
+}
+div#wrap {
+    padding-top: 2em;
+}
+div#head,
+div#menu {
+    padding-top: 0;
+}
+div.mask {
+    padding-top: 4em;
+}
+div.matrix {
+    width: 100%;
+    overflow: hidden;
+}
+div.matrix div.block {
+    width: 44%;
+    min-height: 6em;
+    padding: 1em;
+    margin-bottom: 1em;
+    float: left;
+}
+div.matrix div.odd {
+    margin-right: 1em;
+}

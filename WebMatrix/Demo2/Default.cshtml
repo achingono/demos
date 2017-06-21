@@ -1,0 +1,32 @@
+﻿@{
+    var paragraph = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. <b>Hic ambiguo ludimur.</b> Ut aliquid scire se gaudeant? Duo Reges: constructio interrete. Quae diligentissime contra Aristonem dicuntur a Chryippo. Neque enim disputari sine reprehensione nec cum iracundia aut pertinacia recte disputari potest. Teneo, inquit, finem illi videri nihil dolere. <mark>Sed fac ista esse non inportuna;</mark> Animum autem reliquis rebus ita perfecit, ut corpus; Theophrasti igitur, inquit, tibi liber ille placet de beata vita?";
+    var items = new[] { 
+        "Quid ergo attinet gloriose loqui, nisi constanter loquare?", 
+        "Satisne vobis videor pro meo iure in vestris auribus commentatus?",
+        "Non enim, si omnia non sequebatur, idcirco non erat ortus illinc.",
+        "Nunc omni virtuti vitium contrario nomine opponitur."
+    };
+}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Web Matrix Demo 2</title>
+    </head>
+    <body>
+
+        <p>The paragraph below has <strong>@paragraph.Split(' ').Length</strong> words
+            and <strong>@paragraph.Split('.').Length</strong> sentences.</p>
+        
+        <p>@paragraph</p>
+        
+        <p>The list below has @items.Length items.</p>
+        <ul>
+            @foreach(string item in items) {
+                <li>@item</li>
+            }
+        </ul>
+        
+    </body>
+</html>

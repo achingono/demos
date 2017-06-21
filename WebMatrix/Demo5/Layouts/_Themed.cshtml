@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@Page.Title</title>
+        <link href="/Themes/@(Page.Theme)/layout.css" rel="stylesheet" type="text/css" />
+        <link href="/Themes/@(Page.Theme)/styles.css" rel="stylesheet" type="text/css" />
+        @RenderSection("head", required:false)
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="head">
+                <a href="/" title="home">
+                    <img src="/themes/default/images/Logo.png" alt="logo" />
+                </a>
+            </div>
+            <div id="menu">
+                @RenderSection("menu", required:true)
+            </div>
+            <div class="mask">
+                <div class="cols">
+                    <div class="main">
+                        @RenderBody()
+                    </div>
+                    <div class="side">
+                        @RenderSection("side", required:false)
+                    </div>
+                </div>
+            </div>
+            <div id="foot">
+                Copyright &copy; @DateTime.Now.Year &mdash; All rights reserved.
+            </div>
+        </div>
+    </body>
+</html>

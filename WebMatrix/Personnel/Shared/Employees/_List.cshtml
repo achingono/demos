@@ -1,0 +1,7 @@
+﻿@{
+    Page.Title = "Employees";
+}
+
+<h1>@Page.Title</h1>
+
+@Helpers.Lists.Employees(DataContext.Current.Employees)

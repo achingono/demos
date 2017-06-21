@@ -1,0 +1,10 @@
+﻿@{
+    var items = new[] { "Employees", "Products", "Customers", "Orders" };
+}
+<ul class="menu horizontal">
+	@foreach( var item in items){
+        <li>
+            <a href="/@item.Replace(" ", "-").ToLower()" title="@item">@item</a>
+        </li>
+    }
+</ul>

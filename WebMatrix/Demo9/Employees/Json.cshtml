@@ -1,0 +1,9 @@
+﻿@{
+    Layout = "";
+    Response.ContentType = "text/json";
+
+    var db = Database.Open("Northwind");
+    var employees = db.Query("SELECT * FROM Employees");
+    
+    Json.Write(employees, Response.Output);
+}

@@ -1,0 +1,31 @@
+﻿@helper DropdownList(string name, IEnumerable<Tuple<string, string>> items) {
+    <select name="@name">
+        @foreach(var item in items) {
+            <option value="@item.Item2">@item.Item1</option>
+        }
+    </select>
+}
+
+@helper OrderedList(IEnumerable<Tuple<string, string>> items) {
+    <ol>
+        @foreach(var item in items) {
+            <li>@item.Item1</li>
+        }
+    </ol>
+}
+
+@helper UnorderedList(IEnumerable<Tuple<string, string>> items) {
+    <ul>
+        @foreach(var item in items) {
+            <li>@item.Item1</li>
+        }
+    </ul>
+}
+
+@helper SortedList(IEnumerable<Tuple<string, string>> items) {
+    <ol>
+        @foreach(var item in items.OrderBy(x => x.Item1)){
+            <li>@item.Item1</li>
+        }
+    </ol>
+}

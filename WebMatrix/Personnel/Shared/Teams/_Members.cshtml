@@ -1,0 +1,17 @@
+﻿@{
+    var teamId = UrlData[0];
+
+    if (teamId.IsEmpty())
+    {
+        Response.Redirect("~/teams");
+    }
+
+    var context = DataContext.Current;
+    var team = context.Teams.Find(int.Parse(teamId));
+
+    Page.Title = "Team Members";
+}
+
+<h1>@Page.Title</h1>
+
+@Helpers.Lists.Employees(team.Members)

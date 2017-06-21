@@ -1,0 +1,21 @@
+﻿@{
+    Page.Title = string.Format("Demo #{0} - {1}", 
+                    AppState["DemoNumber"], AppState["DemoTask"]);
+    
+    Page.Theme = "default";    
+}
+
+@section menu{
+   @RenderPage("~/Shared/_Menu.cshtml") 
+}
+
+<h1>Demo #@AppState["DemoNumber"]</h1>
+
+<h2>@AppState["DemoTask"]</h2>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quo modo autem optimum, si bonum praeterea 
+    nullum est? Duo Reges: constructio interrete. Ne amores quidem sanctos a sapiente alienos esse arbitrantur. </p>
+
+@RenderPage("~/Shared/_List.cshtml")
+
+<p><em>Videamus igitur sententias eorum, tum ad verba redeamus. At iam decimum annum in spelunca iacet. </em></p>

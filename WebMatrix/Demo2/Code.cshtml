@@ -1,0 +1,23 @@
+﻿@{ 
+    int x = 123; 
+    string y = "because.";
+    Page.Title = "The Code Block";
+}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@Page.Title</title>
+    </head>
+    <body>
+        <h1>@Page.Title</h1>
+        <p>
+            @* Here we simply display the value of 'x' *@
+            The value of <strong>x</strong> is: @x<br/>
+            
+            @* Here we simply display the value of 'y' *@
+            The value of <strong>y</strong> is: @y<br/>
+        </p>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+﻿@{
+    var email = "achingono@prosoftech.com";
+    var isbn = 763924543590;
+    Page.Title = "The @ symbol";
+}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@Page.Title</title>
+    </head>
+    <body>
+        <h1>@Page.Title</h1>
+        <p>Illum mallem levares, quo optimum atque humanissimum virum, Cn. Pisone in eo gymnasio, quod Ptolomaeum vocatur, unaque nobiscum Q. Omnes enim iucundum motum, quo sensus hilaretur. <i>Traditur, inquit, ab Epicuro ratio neglegendi doloris.</i> Non potes, nisi retexueris illa. Quae duo sunt, unum facit. </p>
+        
+        @* Razor automatically ignores the '@' symbol *@
+        <p><strong>My email address is achingono@linezero.com</strong></p>
+        
+        @* In order to display the '@' symbol, it has to be escaped *@
+        <p><strong>The value of @@email is: @email</strong></p>
+        
+        @* In order combine text and code, you may have explicitly specify *@
+        <p><strong>The book you have selected is ISBN@(isbn)</strong></p>
+        
+        <p>Dulce amarum, leve asperum, prope longe, stare movere, quadratum rotundum. Scientiam pollicentur, quam non erat mirum sapientiae cupido patria esse cariorem. Eaedem enim utilitates poterunt eas labefactare atque pervertere. Qualem igitur hominem natura inchoavit? </p>
+
+    </body>
+</html>

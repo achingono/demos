@@ -1,0 +1,19 @@
+﻿@{
+    var pageLocation = string.Format("~/Shared/{0}/", Page.Area);
+    var pageName = "_List";
+    var count = UrlData.Count();
+    
+    if (count >= 1){
+        pageName = "_Details";
+    }
+    
+    Layout = "~/Layouts/_Themed.cshtml";
+}
+
+@section menu{
+   @RenderPage("~/Shared/_Menu.cshtml") 
+}
+
+@RenderPage(string.Format("~/Shared/{0}/{1}.cshtml", Page.Area, pageName))
+
+@RenderBody()

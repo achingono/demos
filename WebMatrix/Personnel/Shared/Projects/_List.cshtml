@@ -1,0 +1,37 @@
+﻿@{
+    Page.Title = "Projects";
+}
+
+<h1>Projects</h1>
+
+<form method="post" action="">
+    <div class="row">
+        <label for="client">Client :</label>
+        <input type="text" name="client" class="autocomplete" value='@Request.Form["client"]' />
+        <input id="clientId" type="hidden" name="clientId" value='@Request.Form["clientId"]' />
+    </div>
+    <div class="row">
+        <label for="team">Team :</label>
+        <input type="text" name="team" class="autocomplete" value='@Request.Form["team"]' />
+        <input id="teamId" type="hidden" name="teamId" value='@Request.Form["teamId"]' />
+    </div>
+    <input type="submit" name="submit" value="Submit" />
+</form>
+
+<script type="text/javascript">
+    $(function () {
+        $(".autocomplete").each(function () {
+            var me = $(this);
+            var name = me.attr("name");
+            me.autocomplete({
+                source: "/api/" + name + "s/search",
+                minLength: 3,
+                select: function (event, ui) {
+                    $(event.target).val(ui.item.label);
+                    $("#" + name + "Id").val(ui.item.id);
+                    return false;
+                }
+            });
+        });
+    });
+</script>

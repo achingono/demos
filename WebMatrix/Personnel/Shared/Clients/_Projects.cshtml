@@ -1,0 +1,17 @@
+﻿@{
+    var clientId = UrlData[0];
+
+    if (clientId.IsEmpty())
+    {
+        Response.Redirect("~/clients");
+    }
+
+    var context = DataContext.Current;
+    var client = context.Clients.Find(int.Parse(clientId));
+
+    Page.Title = "Client Projects";
+}
+
+<h1>@Page.Title</h1>
+
+@Helpers.Lists.Projects(client.Projects)

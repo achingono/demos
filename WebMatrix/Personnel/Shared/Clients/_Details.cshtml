@@ -1,0 +1,45 @@
+﻿@{
+    var customerId = UrlData[0];
+    
+    if (customerId.IsEmpty()) {
+        Response.Redirect("~/clients");
+    }
+
+    var context = ProSoft.Personnel.Data.DataContext.Current;
+
+    var client = context.Clients.Find(int.Parse(customerId));
+    
+    Page.Title = client.Company;
+}
+
+<h1>Client Details</h1>
+
+<div class="customer details">
+    <div class="name">
+        <label>Company :</label>
+        <span class="data">@client.Company</span>
+    </div>
+    <div class="rate">
+        <label>Rate :</label>
+        <span class="data">$@client.Rate.ToString("0.00")</span>
+    </div>
+    <div class="notes">
+        <label>Notes :</label>
+        @Html.Raw(client.Notes)
+    </div>
+    <div class="matrix">
+        <div class="block odd">
+            <big>Mailing Contact</big>
+            @Helpers.Details.Contact(client.Mailing)
+        </div>
+        <div class="block">
+            <big>Billing Contact</big>
+            @Helpers.Details.Contact(client.Billing)
+        </div>
+    </div>
+    <div class="buttons">
+        <a href="./">Back to List</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="./@customerId/edit">Edit</a>
+    </div>
+</div>

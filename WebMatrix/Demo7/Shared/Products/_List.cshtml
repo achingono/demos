@@ -1,0 +1,28 @@
+﻿@{
+    var db = Database.Open("Northwind");
+    var products = db.Query("SELECT * FROM Products");
+    var count = 0;
+    var supplierQuery = "SELECT [Company Name] FROM Suppliers WHERE [Supplier ID] = @0";
+    var categoryQuery = "SELECT [Category Name] FROM Categories WHERE [Category ID] = @0";
+    
+    Page.Title = "Products";
+}
+
+<h1>Products</h1>
+
+<div class="products">
+    @foreach(var product in products){
+        <div class="product @((++count % 2 == 0) ? "even" : "odd")">
+            <a class="image" href="/products/@product["product ID"]">
+                <img alt="@product["Product Name"]" src="/Themes/Default/Images/Untitled.jpg"/>
+            </a>
+            <h3>@product["Product Name"]</h3>
+            <span>@db.QueryValue(supplierQuery, product["Supplier ID"])</span>
+            <span>@db.QueryValue(categoryQuery, product["Category ID"])</span>
+            <span>@product["Unit Price"]</span>
+            <span>
+                <a href="/products/@product["product ID"]">Details</a>
+            </span>
+        </div>
+    }
+</div>

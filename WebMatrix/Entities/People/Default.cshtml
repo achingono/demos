@@ -1,0 +1,12 @@
+﻿@{
+    Page.Title = "People";
+}
+
+@RenderPage("~/Templates/People.cshtml");
+
+<p>Total number of items in UrlData: @UrlData.Count</p>
+<ul>
+    @for(var i = 0; i < UrlData.Count; i++){
+        <li>UrlData[@i]: @UrlData[i]</li>
+    }
+</ul>

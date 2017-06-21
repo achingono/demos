@@ -1,0 +1,68 @@
+﻿@using ProSoft.Personnel.Data;
+@{
+    Page.Title = "Pro/Soft Personnel Manager";
+    var context = DataContext.Current;
+}
+
+@section head{
+    <script type="text/javascript" src="Scripts/jquery-1.6.3.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-ui-1.8.16.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.tmpl.min.js"></script>
+}
+
+<h1>Pro/Soft Personnel Manager</h1>
+
+<h2>Main Portal</h2>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quo modo autem optimum, si bonum praeterea 
+    nullum est? Duo Reges: constructio interrete. Ne amores quidem sanctos a sapiente alienos esse arbitrantur. </p>
+
+@*Helpers.Templates.Render(typeof(ProSoft.Personnel.Data.Employee))*@
+
+<div class="matrix">
+    <div class="block odd">
+        <p>
+            <big>There are <strong>@context.Clients.Count()</strong> clients in the database.</big>
+        </p>
+        <a href="/clients">View All</a> | <a href="/clients/add">Add New</a> | <a href="#clients" class="edit">Edit</a>
+        <input type="text" name="clients" class="autocomplete hidden" />
+    </div>
+    <div class="block">
+        <p>
+            <big>There are <strong>@context.Employees.Count()</strong> employees in the database.</big>
+        </p>
+        <a href="/employees">View All</a> | <a href="/employees/add">Add New</a> | <a href="#employees" class="edit">Edit</a>
+        <input type="text" name="employees" class="autocomplete hidden" />
+    </div>
+    <div class="block odd">
+        <p>
+            <big>There are <strong>@context.Teams.Count()</strong> teams in the database.</big>
+        </p>
+        <a href="/Teams">View All</a> | <a href="/teams/add">Add New</a> | <a href="#teams" class="edit">Edit</a>
+        <input type="text" name="teams" class="autocomplete hidden" />
+    </div>
+    <div class="block">
+        <p>
+            <big>There are <strong>@context.Projects.Count()</strong> projects in the database.</big>
+        </p>
+        <a href="/projects">View All</a> | <a href="/projects/add">Add New</a> | <a href="#projects" class="edit">Edit</a>
+        <input type="text" name="projects" class="autocomplete hidden" />
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".autocomplete").each(function() {
+            var me = $(this);
+            me.autocomplete({
+                source: '/api/' + me.attr("name") + '.svc/search',
+                minLength: 3,
+                formatItem: function (item) {
+                    return item.text;
+                }
+            });
+        });
+    });
+</script>
+
+<p><em>Videamus igitur sententias eorum, tum ad verba redeamus. At iam decimum annum in spelunca iacet. </em></p>

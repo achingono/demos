@@ -1,0 +1,11 @@
+﻿@using ef = System.Data.Entity;
+@using System.Web.Routing;
+@using Microsoft.ApplicationServer.Http.Activation;
+@using Microsoft.ApplicationServer.Http;
+@using Microsoft.ApplicationServer;
+
+@{    
+    ef.Database.SetInitializer<Entities>(new ef.DropCreateDatabaseIfModelChanges<Entities>());
+    
+    RouteTable.Routes.MapServiceRoute<Services.People>("services/people");
+}

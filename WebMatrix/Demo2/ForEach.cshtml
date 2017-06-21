@@ -1,0 +1,29 @@
+﻿@{
+    @* Create an array of strings *@
+    var items = new[] { 
+        "Quid ergo attinet gloriose loqui, nisi constanter loquare?", 
+        "Satisne vobis videor pro meo iure in vestris auribus commentatus?",
+        "Non enim, si omnia non sequebatur, idcirco non erat ortus illinc.",
+        "Nunc omni virtuti vitium contrario nomine opponitur."
+    };
+    Page.Title = "The ForEach Loop";
+}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@Page.Title</title>
+    </head>
+    <body>
+       <h1>@Page.Title</h1>
+        
+        <p>The list below has @items.Length items.</p>
+        
+        <ul>
+            @foreach(string item in items) {
+                <li>@item</li>
+            }
+        </ul>
+    </body>
+</html>
